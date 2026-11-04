@@ -1,0 +1,25 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+data/*
+!data/probe/
+!data/dev/
+runs/
+*.gguf
+*.pte
+.DS_Store
+
+# iOS: generated model bundle (large / data), secrets, build output, generated Xcode project
+ios/Model/
+ios/App/Secrets.plist
+ios/MemNARCore/.build/
+ios/MemNARCore/.swiftpm/
+ios/build/
+ios/*.xcodeproj/
+lines_parity/
+v4ckpt/
+ios/Model_b/
+ios/App/Info.plist
+ios/Phonon/
+ios/Phonon_build/

@@ -1,0 +1,16 @@
+[project]
+name = "memnar"
+version = "1.0.0"
+description = "On-device memory for AI glasses: System 1 (MobileLLM-R1 360M + non-autoregressive heads) inference and phone export"
+requires-python = ">=3.11"
+dependencies = [
+    "huggingface-hub<1.0",
+    "numpy>=2.0",
+    "pydantic>=2.0",
+    "torch>=2.8",
+    "transformers==4.57.1",
+]
+
+[project.optional-dependencies]
+# export/ondevice3.py (System 1 -> ExecuTorch .pte) and export/phonon_coreml.py (speech to text -> Core ML)
+export = ["executorch>=1.0", "coremltools>=9.0", "soundfile>=0.13"]

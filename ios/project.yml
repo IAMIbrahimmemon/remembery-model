@@ -1,0 +1,56 @@
+name: MemNAR
+options:
+  bundleIdPrefix: dev.memnar
+  deploymentTarget:
+    iOS: "18.0"
+  # Model_b/ (the second v4 model) is optional; the folder must exist for the build, and the app skips it when empty
+  preGenCommand: mkdir -p Model_b Phonon
+packages:
+  MemNARCore:
+    path: MemNARCore
+targets:
+  MemNAR:
+    type: application
+    platform: iOS
+    sources:
+      - path: App
+      - path: Model
+        type: folder
+        buildPhase: resources
+      - path: Model_b
+        type: folder
+        buildPhase: resources
+        optional: true
+      # Phonon-2.5 English speech to text (export/phonon_coreml.py); without it the app uses Apple's recognizer
+      - path: Phonon
+        type: folder
+        buildPhase: resources
+        optional: true
+    info:
+      path: App/Info.plist
+      properties:
+        UIBackgroundModes: [audio]
+    dependencies:
+      - package: MemNARCore
+        product: MemNARCore
+    entitlements:
+      path: App/MemNAR.entitlements
+      properties:
+        # two fp32 System 1 models stay resident (decision 38)
+        com.apple.developer.kernel.increased-memory-limit: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.memnar.app
+        MARKETING_VERSION: "0.4"
+        CURRENT_PROJECT_VERSION: "1"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: MEM-NAR
+        INFOPLIST_KEY_NSMicrophoneUsageDescription: "MEM-NAR listens only while recording is on (the red button), to turn the conversation into memories on this phone."
+        INFOPLIST_KEY_NSSpeechRecognitionUsageDescription: "Speech is transcribed on this phone before System 1 reads it."
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        OTHER_LDFLAGS: "-all_load"
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: ""
+        SWIFT_VERSION: "5.0"
+        TARGETED_DEVICE_FAMILY: "1"

@@ -1,0 +1,11 @@
+Remembery
+Copyright 2026 Ibrahim Memon
+
+This product includes software developed by Ibrahim Memon as part of Remembery
+(https://github.com/IAMIbrahimmemon/remembery).
+
+Licensed under the Apache License, Version 2.0. You may use, modify and distribute
+this code, including commercially, provided you keep this NOTICE file and credit
+"Remembery by Ibrahim Memon" in your documentation or about screen.
+
+The model weights this code runs are not covered by this license. See THIRD_PARTY.md.
